@@ -2,19 +2,19 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
+    <form wire:submit="save">
         <!-- Identity -->
         <div>
             @if($this->role === 'admin')
-                <x-input-label for="sin" :value="__('Email')"/>
+                <x-input-label for="identity" :value="__('Email')"/>
             @elseif($this->role === 'pharmacy')
-                <x-input-label for="sin" :value="__('Store ID')"/>
+                <x-input-label for="identity" :value="__('Store ID')"/>
             @else
-                <x-input-label for="sin" :value="__('Sin')"/>
+                <x-input-label for="identity" :value="__('Sin')"/>
             @endif
 
-            <x-text-input wire:model="sin" id="sin" class="block mt-1 w-full" type="text" name="sin" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('sin')" class="mt-2" />
+            <x-text-input wire:model="identity" id="identity" class="block mt-1 w-full" type="text" name="identity" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('identity')" class="mt-2" />
         </div>
 
         <!-- Password -->

@@ -80,6 +80,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Doctor::class,
         ],
+        'patients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Patient::class,
+        ],
+        'pharmacies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pharmacy::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

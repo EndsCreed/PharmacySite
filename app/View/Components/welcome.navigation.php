@@ -17,7 +17,7 @@ class welcome.navigation extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Get the views / contents that represent the component.
      */
     public function render(): View|Closure|string
     {

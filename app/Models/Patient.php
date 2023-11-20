@@ -42,4 +42,8 @@ class Patient extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function getAuthIdentifier() {
+        return $this->sin;
+    }
 }
