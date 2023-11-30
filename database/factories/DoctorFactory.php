@@ -14,7 +14,7 @@ class DoctorFactory extends Factory
     public function definition(): array
     {
         return [
-            'sin' => '123456789',
+            'sin' => fake()->randomNumber(9),
             'name' => fake()->name,
             'specialty' => fake()->word(),
             'experience' => rand(1, 25),

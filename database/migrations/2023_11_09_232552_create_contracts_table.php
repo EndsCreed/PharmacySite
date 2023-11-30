@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->string('company');
-            $table->integer('pharmacy');
+            $table->foreignId('pharmacy')->references('id')->on('pharmacies');
             $table->foreign('company')->references('name')->on('companies');
-            $table->foreign('pharmacy')->references('id')->on('pharmacies');
             $table->date('issued');
             $table->date('expires');
             $table->integer('supervisorID');

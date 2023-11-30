@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
             $table->integer('doctor');
-            $table->integer('drug');
+            $table->foreignId('drug')->references('id')->on('drugs');
             $table->integer('patient');
-            $table->date('date');
+            $table->timestamps();
             $table->foreign('doctor')->references('sin')->on('doctors');
             $table->foreign('patient')->references('sin')->on('patients');
-            $table->foreign('drug')->references('id')->on('drugs');
             $table->integer('quantity');
-            $table->unique(['doctor','patient','drug','date']);
+            $table->unique(['doctor','patient','drug','created_at']);
         });
     }
 

@@ -21,10 +21,18 @@ class Login extends Component
     public string $role = 'patient';
 
     public function save() {
-        if (in_array($this->role, ['admin','doctor','patient','pharmacy', true])) {
+        if (in_array($this->role, ['web','doctor','patient','pharmacy', true])) {
             $this->validate();
 
-            if (! Auth::guard($this->role)->attempt($this->only('identity', 'password'), false)) {
+            $key = '';
+            if ($this->role === 'web')
+                $key = 'email';
+            elseif ($this->role === 'pharmacy')
+                $key = 'id';
+            else
+                $key = 'sin';
+
+            if (! Auth::guard($this->role)->attempt([$key => $this->identity, 'password' => $this->password], false)) {
                 throw ValidationException::withMessages([
                     'identity' => trans('auth.failed'),
                 ]);
@@ -33,7 +41,7 @@ class Login extends Component
             Session::regenerate();
 
             $this->redirect(
-                session('url.intended', RouteServiceProvider::HOME),
+                session('url.intended', route('home')),
                 navigate: true
             );
         } else {

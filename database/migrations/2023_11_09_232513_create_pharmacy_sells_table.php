@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pharmacy_sells', function (Blueprint $table) {
-            $table->integer('pharmacy');
-            $table->integer('drug');
-            $table->foreign('pharmacy')->references('id')->on('pharmacies');
-            $table->foreign('drug')->references('id')->on('drugs');
+            $table->foreignId('pharmacy')->references('id')->on('pharmacies');
+            $table->foreignId('drug')->references('id')->on('drugs');
             $table->double('price');
             $table->timestamps();
             $table->unique(['pharmacy','drug']);

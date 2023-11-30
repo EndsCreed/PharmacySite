@@ -10,7 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 class Doctor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     protected $guard = 'doctor';
 
     /**
@@ -44,8 +43,4 @@ class Doctor extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-
-    public function getAuthIdentifier() {
-        return $this->sin;
-    }
 }

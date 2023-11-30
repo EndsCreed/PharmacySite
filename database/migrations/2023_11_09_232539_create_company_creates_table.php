@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('company_creates', function (Blueprint $table) {
             $table->string('company');
-            $table->integer('drug')->unique();
-            $table->foreign('drug')->references('id')->on('drugs');
+            $table->foreignId('drug')->references('id')->on('drugs');
             $table->foreign('company')->references('name')->on('companies');
             $table->timestamps();
         });
