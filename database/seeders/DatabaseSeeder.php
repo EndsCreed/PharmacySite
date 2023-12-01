@@ -56,19 +56,22 @@ class DatabaseSeeder extends Seeder
         });
 
         // Prescription seeds
-        Doctor::all()->each(function($doctor, $sin) {
-            $patientSins = Patient::all()->pluck('sin');
+        foreach (Doctor::all() as $doctor) {
+            $sin = $doctor->sin;
+            $patients = Patient::all()->shuffle()->all();
             $drugIds = Drug::all()->pluck('id');
-            retry:
-            try {
-                Prescription::factory(rand(0,4))->create([
+            for ($i = random_int(0,4); $i > 0; $i--) {
+                $patientSin = array_pop($patients)->sin;
+                Prescription::factory(1)->create([
                     'doctor' => $sin,
-                    'patient' => array_rand($patientSins->all()),
+                    'patient' => $patientSin,
                     'drug' => array_rand($drugIds->all()),
                 ])->unique;
-            } catch (UniqueConstraintViolationException|QueryException $e) {
-                return;
             }
-        });
+        }
+
+//        Doctor::all()->each(function($doctor, $sin) {
+//
+//        });
     }
 }

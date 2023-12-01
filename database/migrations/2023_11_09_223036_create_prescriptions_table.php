@@ -16,10 +16,10 @@ return new class extends Migration
             $table->integer('doctor');
             $table->foreignId('drug')->references('id')->on('drugs');
             $table->integer('patient');
+            $table->integer('quantity');
             $table->timestamps();
             $table->foreign('doctor')->references('sin')->on('doctors');
             $table->foreign('patient')->references('sin')->on('patients');
-            $table->integer('quantity');
             $table->unique(['doctor','patient','drug','created_at']);
         });
     }

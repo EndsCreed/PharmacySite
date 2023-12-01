@@ -1,16 +1,15 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Pages\Auth\Register;
 use App\Livewire\Pages\Doctor\CreatePatient;
+use App\Livewire\Pages\Doctor\CreatePrescription;
 use App\Livewire\Pages\Doctor\Patients;
 use App\Livewire\Pages\Doctor\PatientView;
+use App\Livewire\Pages\Doctor\ViewPrescription;
 use App\Livewire\Pages\Home;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
-use App\Livewire\Pages\Auth\Register;
-use App\Livewire\Pages\Auth\Login;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +45,12 @@ Route::middleware('auth:doctor')->group(function () {
     Route::get('create-patient', CreatePatient::class)
         ->name('patient.create');
 
-    Route::get('view-patient', PatientView::class)
+    Route::get('view-patient/{patient_id}', PatientView::class)
         ->name('patient.view');
+
+    Route::get('create-prescription', CreatePrescription::class)
+        ->name('prescription.create');
+
+    Route::get('view-prescription', ViewPrescription::class)
+        ->name('prescription.view');
 });

@@ -15,8 +15,8 @@ class PrescriptionFactory extends Factory
             'doctor' => fake()->unique()->randomNumber(9),
             'drug' => fake()->randomNumber(2),
             'patient' => fake()->unique()->randomNumber(9),
-            'date' => fake()->date,
-            'quantity' => fake()->randomNumber(3)
+            'created_at' => now(),
+            'quantity' => fake()->randomNumber(2)
         ];
     }
 }
