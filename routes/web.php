@@ -1,9 +1,9 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Livewire\Components\CreatePatient;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Auth\Register;
-use App\Livewire\Pages\Doctor\CreatePatient;
 use App\Livewire\Pages\Doctor\CreatePrescription;
 use App\Livewire\Pages\Doctor\Patients;
 use App\Livewire\Pages\Doctor\PatientView;
