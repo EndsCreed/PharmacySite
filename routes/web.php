@@ -35,7 +35,9 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 });
 
-Route::middleware('auth:doctor')->group(function () {
+
+Route::middleware('auth:doctor')->group( function() {
+
     Route::get('home', Home::class)
         ->name('home');
 
@@ -48,9 +50,18 @@ Route::middleware('auth:doctor')->group(function () {
     Route::get('view-patient/{patient_id}', PatientView::class)
         ->name('patient.view');
 
-    Route::get('create-prescription', CreatePrescription::class)
+    Route::get('create-prescription/{patient_id}', CreatePrescription::class)
         ->name('prescription.create');
 
-    Route::get('view-prescription', ViewPrescription::class)
+    Route::get('view-prescription/{prescription_id}', ViewPrescription::class)
         ->name('prescription.view');
 });
+
+//Route::middleware('can:view-home')->group(function () {
+//    Route::get('home', Home::class)
+//        ->name('home');
+//});
+//
+//Route::middleware('can:access-doctor')->group(function () {
+//    include base_path('routes/doctor.php');
+//});

@@ -1,3 +1,6 @@
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +12,16 @@
 
     .pagination-button-unavailable {
         @apply relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-700 bg-gray-800 border dark:border-gray-700 cursor-default leading-5;
+    }
+
+    .contentStyle {
+        @apply max-w-7xl mx-auto mt-10 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg py-6;
+    }
+    .headerStyle-text {
+        @apply font-semibold text-xl text-gray-800 dark:text-gray-200;
+    }
+    .headerStyle-link {
+        @apply pl-3 text-gray-300 font-semibold border-l border-gray-600 dark:hover:border-blue-500 hover:text-gray-100;
     }
 }
 
@@ -41,15 +54,3 @@
 }
 
 [x-cloak] { display: none !important; }
-
-@layer components {
-    .contentStyle {
-        @apply max-w-7xl mx-auto mt-10 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg py-6;
-    }
-    .headerStyle-text {
-        @apply font-semibold text-xl text-gray-800 dark:text-gray-200;
-    }
-    .headerStyle-link {
-        @apply pl-3 text-gray-300 font-semibold border-l border-gray-600 dark:hover:border-blue-500 hover:text-gray-100;
-    }
-}
