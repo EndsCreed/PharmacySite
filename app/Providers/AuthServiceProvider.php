@@ -24,20 +24,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('view-home', function ($guard) {
-            return $guard !== NULL;
-        });
 
-        Gate::define('access-doctor', function ($guard) {
-            return $guard === 'doctor';
-        });
-
-        Gate::define('access-patient', function ($guard) {
-            return $guard === 'patient';
-        });
-
-        Gate::define('access-pharmacy', function ($guard) {
-            return $guard === 'pharmacy';
-        });
     }
 }

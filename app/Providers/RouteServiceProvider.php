@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
-use App\Livewire\Pages\Home;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use function Laravel\Prompts\error;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,8 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
-    public function boot(): void
-    {
+    public function boot(): void {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
@@ -37,8 +38,28 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-//            Route::middleware('auth:doctor')
-//                ->group(base_path('routes/doctor.php'));
         });
+    }
+
+    public static function getRoute($route = null, $params = []) {
+        $guard = Auth::guard(Session::get('role'))->user()->getGuarded();
+        if ($guard === '*') {
+            return ($route === null) ? error('NoRouteOrGuard') : route($route, $params);
+        }
+        if ($route === null) {
+            return route($guard, $params);
+        }
+        return route($guard.'.'.$route, $params);
+    }
+
+    public static function getRouteString($route = null) {
+        $guard = Auth::guard(Session::get('role'))->user()->getGuarded();
+        if ($guard === '*') {
+            return ($route === null) ? error('NoRouteOrGuard') : $route;
+        }
+        if ($route === null) {
+            return $guard;
+        }
+        return $guard.'.'.$route;
     }
 }

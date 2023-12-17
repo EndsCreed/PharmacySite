@@ -11,6 +11,8 @@ class Pharmacy extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $guarded = 'pharmacy';
+
     /**
      * The attributes that are mass assignable.
      *

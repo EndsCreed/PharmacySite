@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Auth;
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
@@ -38,10 +39,15 @@ class Login extends Component
                 ]);
             }
 
+            $role = $this->role;
+
+            Session::put('role', $role);
+            Auth::setDefaultDriver($role);
+
             Session::regenerate();
 
             $this->redirect(
-                session('url.intended', route('home')),
+                session('url.intended', route($role.'.home')),
                 navigate: true
             );
         } else {

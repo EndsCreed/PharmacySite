@@ -9,6 +9,7 @@ use App\Livewire\Pages\Doctor\Patients;
 use App\Livewire\Pages\Doctor\PatientView;
 use App\Livewire\Pages\Doctor\ViewPrescription;
 use App\Livewire\Pages\Home;
+use App\Livewire\Pages\Pharmacy\Contracts;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,33 +36,56 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 });
 
+Route::name('doctor.')->group(function() {
+    Route::prefix('doctor/')->group(function() {
+        Route::get('home', Home::class)
+            ->name('home');
 
-Route::middleware('auth:doctor')->group( function() {
+        Route::get('patients', Patients::class)
+            ->name('patients');
 
-    Route::get('home', Home::class)
-        ->name('home');
+        Route::get('view-patient/{patient_id}', PatientView::class)
+            ->name('patient.view');
 
-    Route::get('patients', Patients::class)
-        ->name('patients');
-
-    Route::get('create-patient', CreatePatient::class)
-        ->name('patient.create');
-
-    Route::get('view-patient/{patient_id}', PatientView::class)
-        ->name('patient.view');
-
-    Route::get('create-prescription/{patient_id}', CreatePrescription::class)
-        ->name('prescription.create');
-
-    Route::get('view-prescription/{prescription_id}', ViewPrescription::class)
-        ->name('prescription.view');
+        Route::get('view-prescription/{prescription_id}', ViewPrescription::class)
+            ->name('prescription.view');
+    });
 });
 
-//Route::middleware('can:view-home')->group(function () {
-//    Route::get('home', Home::class)
-//        ->name('home');
-//});
-//
-//Route::middleware('can:access-doctor')->group(function () {
-//    include base_path('routes/doctor.php');
-//});
+Route::name('patient.')->group(function() {
+    Route::prefix('patient/')->group(function() {
+        Route::get('home', Home::class)
+            ->name('home');
+
+        Route::get('information')
+            ->name('information');
+
+        Route::get('prescriptions')
+            ->name('prescriptions');
+
+        Route::get('view-prescription/{prescription_id}', ViewPrescription::class)
+            ->name('prescription.view');
+    });
+});
+
+Route::name('pharmacy.')->group(function() {
+    Route::prefix('pharmacy/')->group(function() {
+        Route::get('home', Home::class)
+            ->name('home');
+
+        Route::get('contracts', Contracts::class)
+            ->name('contracts');
+
+        Route::get('drugs')
+            ->name('drugs');
+
+        Route::get('view-drug/{drug_id}')
+            ->name('drug.view');
+
+        Route::get('create-contract')
+            ->name('contract.create');
+
+        Route::get('view-contract/{contract_id}')
+            ->name('contract.view');
+    });
+});

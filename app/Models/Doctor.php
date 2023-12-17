@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Doctor extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $guard = 'doctor';
+    protected $guarded = 'doctor';
 
     /**
      * The attributes that are mass assignable.
