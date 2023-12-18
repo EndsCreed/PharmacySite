@@ -1,15 +1,15 @@
 <?php
 
-use App\Livewire\Actions\Logout;
-use App\Livewire\Components\CreatePatient;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Auth\Register;
-use App\Livewire\Pages\Doctor\CreatePrescription;
 use App\Livewire\Pages\Doctor\Patients;
 use App\Livewire\Pages\Doctor\PatientView;
 use App\Livewire\Pages\Doctor\ViewPrescription;
 use App\Livewire\Pages\Home;
 use App\Livewire\Pages\Pharmacy\Contracts;
+use App\Livewire\Pages\Pharmacy\ContractView;
+use App\Livewire\Pages\Pharmacy\Products;
+use App\Livewire\Pages\Pharmacy\ProductView;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,16 +76,13 @@ Route::name('pharmacy.')->group(function() {
         Route::get('contracts', Contracts::class)
             ->name('contracts');
 
-        Route::get('drugs')
-            ->name('drugs');
-
-        Route::get('view-drug/{drug_id}')
-            ->name('drug.view');
-
-        Route::get('create-contract')
-            ->name('contract.create');
-
-        Route::get('view-contract/{contract_id}')
+        Route::get('view-contract/{contract_id}', ContractView::class)
             ->name('contract.view');
+
+        Route::get('products', Products::class)
+            ->name('products');
+
+        Route::get('view-product/{product_id}', ProductView::class)
+            ->name('product.view');
     });
 });

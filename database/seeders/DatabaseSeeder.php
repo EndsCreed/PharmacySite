@@ -56,10 +56,10 @@ class DatabaseSeeder extends Seeder
         });
 
         // Prescription seeds
+        $drugIds = Drug::all()->pluck('id');
         foreach (Doctor::all() as $doctor) {
             $sin = $doctor->sin;
             $patients = Patient::all()->shuffle()->all();
-            $drugIds = Drug::all()->pluck('id');
             for ($i = random_int(0,4); $i > 0; $i--) {
                 $patientSin = array_pop($patients)->sin;
                 Prescription::factory(1)->create([
@@ -67,6 +67,21 @@ class DatabaseSeeder extends Seeder
                     'patient' => $patientSin,
                     'drug' => array_rand($drugIds->all()),
                 ])->unique;
+            }
+        }
+
+        // Company Creates
+
+        $d = 0;
+        foreach (Company::all() as $c) {
+            $i = 0;
+            while ($i < 4 && $d < 60) {
+                $d++;
+                DB::table('company_creates')->insert([
+                    'company' => $c->name,
+                    'drug' => $d
+                ]);
+                $i++;
             }
         }
 

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contracts', function (Blueprint $table) {
+            $table->id();
             $table->string('company');
             $table->foreignId('pharmacy')->references('id')->on('pharmacies');
             $table->foreign('company')->references('name')->on('companies');

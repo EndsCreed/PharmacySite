@@ -21,18 +21,18 @@ use Illuminate\Support\Facades\Auth;
                             {{ __('Home') }}
                         </x-nav-link>
                         @if(Session::get('role') === 'doctor')
-                                <x-nav-link :href="RouteServiceProvider::getRoute('patients')" :active="request()->routeIs(RouteServiceProvider::getRouteString('patients'))" wire:navigate>
-                                    {{ __('Patients') }}
-                                </x-nav-link>
-                            </div>
+                            <x-nav-link :href="RouteServiceProvider::getRoute('patients')" :active="request()->routeIs(RouteServiceProvider::getRouteString('patients'))" wire:navigate>
+                                {{ __('Patients') }}
+                            </x-nav-link>
                         @elseif(Session::get('role') === 'patient')
 
                         @elseif(Session::get('role') === 'pharmacy')
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <x-nav-link :href="RouteServiceProvider::getRoute('contracts')" :active="request()->routeIs(RouteServiceProvider::getRouteString('contracts'))" wire:navigate>
-                                    {{ __('Contracts') }}
-                                </x-nav-link>
-                            </div>
+                            <x-nav-link :href="RouteServiceProvider::getRoute('contracts')" :active="request()->routeIs(RouteServiceProvider::getRouteString('contracts'))" wire:navigate>
+                                {{ __('Contracts') }}
+                            </x-nav-link>
+                            <x-nav-link :href="RouteServiceProvider::getRoute('products')" :active="request()->routeIs(RouteServiceProvider::getRouteString('products'))" wire:navigate>
+                                {{ __('Products') }}
+                            </x-nav-link>
                         @endif
                     </div>
                 </div>
@@ -78,6 +78,7 @@ use Illuminate\Support\Facades\Auth;
                 </div>
             </div>
         </div>
+
 
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
